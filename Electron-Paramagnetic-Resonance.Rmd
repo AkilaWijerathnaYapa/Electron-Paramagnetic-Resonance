@@ -1,0 +1,15 @@
+---
+title: "Electron-Paramagnetic-Resonance"
+author: "Akila Wijerathna-Yapa"
+date: "2024-10-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+
