@@ -3,7 +3,7 @@ library(ggplot2)
 library(pracma)
 
 # Read the EPR data, skipping lines if necessary
-epr_data <- read.table("Data/CUSO4_T2/CUSO4_D0.TXT", header = FALSE, skip = 2)
+epr_data <- read.table("Data/FESO4_T2/FESO4_D0.TXT", header = FALSE, skip = 2)
 
 # Assign meaningful column names
 colnames(epr_data) <- c("Index", "Magnetic_Field", "Signal_Intensity")
@@ -16,6 +16,18 @@ ggplot(epr_data, aes(x = Magnetic_Field, y = Signal_Intensity)) +
   geom_line() +
   labs(title = "EPR Spectrum", x = "Magnetic Field (Gauss)", y = "Signal Intensity")
 
+
+# Plotting the raw EPR spectrum with x-axis labels every 250 units and rotated 90 degrees
+ggplot(epr_data, aes(x = Magnetic_Field, y = Signal_Intensity)) +
+  geom_line() +
+  labs(title = "EPR Spectrum", x = "Magnetic Field (Gauss)", y = "Signal Intensity") +
+  scale_x_continuous(breaks = seq(min(epr_data$Magnetic_Field), max(epr_data$Magnetic_Field), by = 250)) +  # Set x-axis breaks every 250 units
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))  # Rotate x-axis labels 90 degrees
+
+
+
+#################################################################
+# below sybtax are incorrect for thiese peaks / 
 
 # mark maxima nad minima
 
@@ -52,8 +64,8 @@ g_factor <- h * microwave_frequency / (mu_B * midpoint_field_T)
 ###--- anti-derivation
 
 # Step 1: Define the range of interest
-start_field <- 2800
-end_field <- 3500
+start_field <- 2897.1972
+end_field <- 3897.1972
 
 # Step 2: Subset the data based on the defined range
 roi_peak <- subset(epr_data, Magnetic_Field >= start_field & Magnetic_Field <= end_field)
